@@ -1,0 +1,7 @@
+/.idea/
+/vendor/
+/var/
+/dist/
+
+/.env
+/coverage.txt
