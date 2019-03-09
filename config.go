@@ -5,7 +5,6 @@ import (
 	"os"
 	"sync"
 
-	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
 
@@ -39,7 +38,7 @@ func GetListenPort() *string {
 // Looks at the APP_MODE environment variable if the application is running without a flag -mode
 // Default release
 func GetApplicationMode() *string {
-	mode := gin.ReleaseMode
+	mode := "release"
 	if envMode := GetEnvStr("APP_MODE"); envMode != "" {
 		mode = envMode
 	}

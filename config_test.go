@@ -5,8 +5,6 @@ import (
 	"os"
 	"reflect"
 	"testing"
-
-	"github.com/gin-gonic/gin"
 )
 
 func init() {
@@ -16,7 +14,7 @@ func init() {
 	if err := os.Setenv("PORT", "8080"); err != nil {
 		panic(err)
 	}
-	if err := os.Setenv("APP_MODE", gin.TestMode); err != nil {
+	if err := os.Setenv("APP_MODE", "test"); err != nil {
 		panic(err)
 	}
 }
