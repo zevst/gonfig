@@ -1,4 +1,4 @@
-module config
+module gonfig
 
 go 1.12
 
