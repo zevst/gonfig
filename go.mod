@@ -1,4 +1,4 @@
-module gonfig
+module github.com/mylockerteam/gonfig
 
 go 1.12
 
