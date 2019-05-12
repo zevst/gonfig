@@ -11,6 +11,9 @@ func init() {
 	if err := os.Setenv("TEST_GET_ENV_STR", "THIS IS TEST"); err != nil {
 		panic(err)
 	}
+	if err := os.Setenv("TEST_GET_ENV_INT", "202"); err != nil {
+		panic(err)
+	}
 	if err := os.Setenv("PORT", "8080"); err != nil {
 		panic(err)
 	}
@@ -80,6 +83,37 @@ func TestGetApplicationMode(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := GetApplicationMode(); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("GetApplicationMode() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestGetEnvInt(t *testing.T) {
+	type args struct {
+		key string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			args: args{
+				key: "TEST_GET_ENV_INT",
+			},
+			want: 202,
+		},
+		{
+			args: args{
+				key: "TEST_GET_ENV_STR",
+			},
+			want: 0,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := GetEnvInt(tt.args.key); got != tt.want {
+				t.Errorf("GetEnvInt() = %v, want %v", got, tt.want)
 			}
 		})
 	}

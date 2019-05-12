@@ -2,7 +2,9 @@ package gonfig
 
 import (
 	"flag"
+	"log"
 	"os"
+	"strconv"
 	"sync"
 
 	"github.com/joho/godotenv"
@@ -10,7 +12,8 @@ import (
 
 var configurator sync.Once
 
-// GetEnv returns ENV variable from environment or .env file as []byte
+// GetEnv returns ENV variable from environment or .env file as []byte if it's possible and ENV variable exists
+// Default 0
 func GetEnv(key string) []byte {
 	configurator.Do(func() {
 		_ = godotenv.Load()
@@ -18,9 +21,20 @@ func GetEnv(key string) []byte {
 	return []byte(os.Getenv(key))
 }
 
-// GetEnvStr returns ENV variable from environment or .env file as string
+// GetEnvStr returns ENV variable from environment or .env file as string if it's possible and ENV variable exists
+// Default ""
 func GetEnvStr(key string) string {
 	return string(GetEnv(key))
+}
+
+// GetEnvInt returns ENV variable from environment or .env file as int if it's possible and ENV variable exists
+// Default 0
+func GetEnvInt(key string) int {
+	result, err := strconv.Atoi(GetEnvStr(key))
+	if err != nil {
+		log.Println(err)
+	}
+	return result
 }
 
 // GetListenPort returns a flag to the port to launch the application.
