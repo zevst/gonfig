@@ -27,6 +27,14 @@ func GetEnvStr(key string) string {
 	return string(GetEnv(key))
 }
 
+// GetEnvStr returns ENV variable from environment or .env file as string else returns default value
+func GetEnvStrWithDefault(key string, defaultValue string) string {
+	if value := string(GetEnv(key)); value != "" {
+		return value
+	}
+	return defaultValue
+}
+
 // GetEnvInt returns ENV variable from environment or .env file as int if it's possible and ENV variable exists
 // Default 0
 func GetEnvInt(key string) int {
@@ -35,6 +43,14 @@ func GetEnvInt(key string) int {
 		log.Println(err)
 	}
 	return result
+}
+
+// GetEnvIntWithDefault returns ENV variable from environment or .env file as int else returns default value
+func GetEnvIntWithDefault(key string, defaultValue int) int {
+	if result, err := strconv.Atoi(GetEnvStr(key)); err == nil {
+		return result
+	}
+	return defaultValue
 }
 
 // GetListenPort returns a flag to the port to launch the application.
