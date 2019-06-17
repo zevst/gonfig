@@ -7,21 +7,19 @@ import (
 	"testing"
 )
 
+var envs = map[string]string{
+	"TEST_GET_ENV_STR":     "THIS IS TEST",
+	"TEST_GET_ENV_ARR_STR": "THIS;IS;TEST",
+	"TEST_GET_ENV_INT":     "202",
+	"PORT":                 "8080",
+	"APP_MODE":             "test",
+}
+
 func init() {
-	if err := os.Setenv("TEST_GET_ENV_STR", "THIS IS TEST"); err != nil {
-		panic(err)
-	}
-	if err := os.Setenv("TEST_GET_ENV_ARR_STR", "THIS;IS;TEST"); err != nil {
-		panic(err)
-	}
-	if err := os.Setenv("TEST_GET_ENV_INT", "202"); err != nil {
-		panic(err)
-	}
-	if err := os.Setenv("PORT", "8080"); err != nil {
-		panic(err)
-	}
-	if err := os.Setenv("APP_MODE", "test"); err != nil {
-		panic(err)
+	for key, value := range envs {
+		if err := os.Setenv(key, value); err != nil {
+			panic(err)
+		}
 	}
 }
 

@@ -38,7 +38,7 @@ func GetEnvArrStr(key string) []string {
 	return strings.Split(str, ";")
 }
 
-// GetEnvStr returns ENV variable from environment or .env file as string else returns default value
+// GetEnvStrWithDefault returns ENV variable from environment or .env file as string else returns default value
 func GetEnvStrWithDefault(key string, defaultValue string) string {
 	if value := string(GetEnv(key)); value != "" {
 		return value
