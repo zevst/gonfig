@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"strconv"
+	"strings"
 	"sync"
 
 	"github.com/joho/godotenv"
@@ -25,6 +26,16 @@ func GetEnv(key string) []byte {
 // Default ""
 func GetEnvStr(key string) string {
 	return string(GetEnv(key))
+}
+
+// GetEnvArrStr returns ENV variable from environment or .env file as []string if it's possible and ENV variable exists
+// Default ""
+func GetEnvArrStr(key string) []string {
+	str := string(GetEnv(key))
+	if str == "" {
+		return nil
+	}
+	return strings.Split(str, ";")
 }
 
 // GetEnvStr returns ENV variable from environment or .env file as string else returns default value

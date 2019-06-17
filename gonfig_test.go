@@ -11,6 +11,9 @@ func init() {
 	if err := os.Setenv("TEST_GET_ENV_STR", "THIS IS TEST"); err != nil {
 		panic(err)
 	}
+	if err := os.Setenv("TEST_GET_ENV_ARR_STR", "THIS;IS;TEST"); err != nil {
+		panic(err)
+	}
 	if err := os.Setenv("TEST_GET_ENV_INT", "202"); err != nil {
 		panic(err)
 	}
@@ -38,11 +41,48 @@ func TestGetEnvStr(t *testing.T) {
 			},
 			want: "THIS IS TEST",
 		},
+		{
+			args: args{
+				key: "",
+			},
+			want: "",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := GetEnvStr(tt.args.key); got != tt.want {
 				t.Errorf("GetEnvStr() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestGetEnvArrStr(t *testing.T) {
+	type args struct {
+		key string
+	}
+	tests := []struct {
+		name string
+		args args
+		want []string
+	}{
+		{
+			args: args{
+				key: "TEST_GET_ENV_ARR_STR",
+			},
+			want: []string{"THIS", "IS", "TEST"},
+		},
+		{
+			args: args{
+				key: "",
+			},
+			want: nil,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := GetEnvArrStr(tt.args.key); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("GetEnvArrStr() = %v, want %v", got, tt.want)
 			}
 		})
 	}
