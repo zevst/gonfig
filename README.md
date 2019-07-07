@@ -1,3 +1,5 @@
+# DEPRICATED! I recommend using [Viper](https://github.com/spf13/viper)
+
 # Gonfig - configurator for golang application [![GoDoc](https://godoc.org/github.com/mylockerteam/gonfig?status.svg)](https://godoc.org/github.com/mylockerteam/gonfig) [![GitHub tag](https://img.shields.io/github/tag/mylockerteam/gonfig.svg)](https://github.com/mylockerteam/gonfig/releases)
 
 [![License](https://img.shields.io/github/license/zevst/gonfig.svg)](https://github.com/zevst/gonfig/blob/master/LICENSE)
